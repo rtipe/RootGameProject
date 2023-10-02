@@ -1,0 +1,3 @@
+/Users/vincentballandi/Documents/cppApp/RootGameProject/build/_deps/jsoncpp-subbuild/CMakeFiles/jsoncpp-populate.dir
+/Users/vincentballandi/Documents/cppApp/RootGameProject/build/_deps/jsoncpp-subbuild/CMakeFiles/edit_cache.dir
+/Users/vincentballandi/Documents/cppApp/RootGameProject/build/_deps/jsoncpp-subbuild/CMakeFiles/rebuild_cache.dir
