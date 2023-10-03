@@ -17,7 +17,14 @@ FetchContent_Declare(JSONCpp
 FetchContent_MakeAvailable(JSONCpp)
 
 add_executable(RootGameProject src/main.cpp)
-target_link_libraries(RootGameProject sfml-graphics sfml-audio sfml-window sfml-system jsoncpp_lib)
+
+# Inclure tous les fichiers .hpp dans GameEngine/src
+file(GLOB HEADER_FILES "GameEngine/src/*.hpp")
+target_sources(RootGameProject PRIVATE ${HEADER_FILES})
+
+target_link_libraries(RootGameProject
+        sfml-graphics sfml-audio sfml-window sfml-system jsoncpp_lib)
+
 target_compile_features(RootGameProject PUBLIC cxx_std_17)
 
 if(WIN32)
@@ -34,6 +41,14 @@ if(WIN32)
             COMMENT "Copy SFML DLLs"
             PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86> $<TARGET_FILE_DIR:RootGameProject>
             VERBATIM)
+endif()
+
+if(UNIX)
+    target_link_libraries(RootGameProject libUnitiGameEngine.a)
+endif()
+
+if(WIN32)
+    target_link_libraries(RootGameProject UnitiGameEngine.lib)
 endif()
 
 install(TARGETS RootGameProject)

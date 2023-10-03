@@ -1,5 +1,11 @@
 #!/bin/bash
 
+git clone git@github.com:rtipe/GameEngine.git
+cd GameEngine
+find . -type f -name "*.cpp" -exec rm -f {} \;
+rm -rf CMakeLists.txt
+cd ..
+
 lib_a="https://github.com/rtipe/GameEngine/releases/download/v0.0.1/libUnitiGameEngine.a"
 lib_lib="https://github.com/rtipe/GameEngine/releases/download/v0.0.1/UnitiGameEngine.lib"
 
@@ -49,13 +55,9 @@ done
 echo "Quel FPS voulez-vous ?"
 read fps
 
-mkdir Json
-mkdir Json/Scenes
-touch Json/Scenes/start.json
-touch Json/projectInfos.json
 
 # Mettre à jour le fichier test.json avec les réponses de l'utilisateur
-cat <<EOL > "Json/projectInfos.json"
+cat <<EOL > "json/projectInfos.json"
 {
     "name": "$project_name",
     "directoryScenePath": "../Json/Scenes/",
@@ -72,5 +74,25 @@ EOL
 
 # Afficher un message de confirmation
 echo "Le fichier test.json a été mis à jour avec les informations fournies."
+
+echo "Build du projet en cours..."
+
+# Créer le dossier build
+mkdir build
+
+# Se déplacer dans le dossier build
+cd build
+
+# Générer le projet
+cmake ..
+
+# Compiler le projet
+make
+
+# Afficher un message de confirmation
+
+echo "Build terminé."
+
+# Se déplacer dans le dossier bin
 
 # Vous pouvez ajouter d'autres étapes de configuration du projet ici

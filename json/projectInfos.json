@@ -1,0 +1,12 @@
+{
+    "name": "test",
+    "directoryScenePath": "../Json/Scenes/",
+    "startScene": "test.json",
+    "globalScene": "global.json",
+    "windowInfos": {
+        "title": "aze",
+        "width": 600,
+        "height": 500,
+        "fps": 60
+    }
+}
