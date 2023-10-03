@@ -16,10 +16,27 @@ FetchContent_Declare(JSONCpp
         GIT_TAG 1.9.5)
 FetchContent_MakeAvailable(JSONCpp)
 
-add_executable(RootGameProject src/main.cpp)
+add_executable(RootGameProject 
+        src/main.cpp
+        scripts/ForwardParallax.cpp
+        scripts/VasselMovement.cpp
+)
 
 # Inclure tous les fichiers .hpp dans GameEngine/src
-file(GLOB HEADER_FILES "GameEngine/src/*.hpp")
+include_directories(
+        ${CMAKE_SOURCE_DIR}/GameEngine/src
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/AssetManager
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Displayer
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Event
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Object
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Object/EmptyObject
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Object/SpriteObject
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Object/TextObject
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Object/Transform
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Scene
+        ${CMAKE_SOURCE_DIR}/GameEngine/src/Script
+        ${CMAKE_SOURCE_DIR}/scripts
+)
 target_sources(RootGameProject PRIVATE ${HEADER_FILES})
 
 target_link_libraries(RootGameProject
@@ -44,11 +61,11 @@ if(WIN32)
 endif()
 
 if(UNIX)
-    target_link_libraries(RootGameProject libUnitiGameEngine.a)
+    target_link_libraries(RootGameProject ${CMAKE_SOURCE_DIR}/libUnitiGameEngine.a)
 endif()
 
 if(WIN32)
-    target_link_libraries(RootGameProject UnitiGameEngine.lib)
+    target_link_libraries(RootGameProject ${CMAKE_SOURCE_DIR}/UnitiGameEngine.lib)
 endif()
 
 install(TARGETS RootGameProject)

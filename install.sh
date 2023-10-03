@@ -60,7 +60,7 @@ read fps
 cat <<EOL > "json/projectInfos.json"
 {
     "name": "$project_name",
-    "directoryScenePath": "../Json/Scenes/",
+    "directoryScenePath": "../json/scenes/",
     "startScene": "test.json",
     "globalScene": "global.json",
     "windowInfos": {
@@ -88,6 +88,10 @@ cmake ..
 
 # Compiler le projet
 make
+
+# Move la source
+
+mv ./bin/RootGameProject ../
 
 # Afficher un message de confirmation
 
